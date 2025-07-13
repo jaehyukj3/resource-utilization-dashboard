@@ -1,0 +1,31 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    - cron: '0 21 * * 1,4' # 매주 월/목 오전 6시 KST (UTC 21:00)
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Supabase SDK
+        run: npm install @supabase/supabase-js
+
+      - name: Ping Supabase with lightweight query
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: |
+          node -e "
+            const { createClient } = require('@supabase/supabase-js');
+            const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+            supabase
+              .from('resources')
+              .select('id')
+              .limit(1)
+              .then(({ error, data }) => {
+                if (error) throw error;
+                console.log('Supabase keep-alive ping 성공:', data.length ? 'OK' : 'No rows');
+              });
+          "
