@@ -9,7 +9,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { label: "Dashboard", href: "/", icon: "fas fa-tv" },
+    { label: "Dashboard", href: "/dashboard", icon: "fas fa-tv" },
     { label: "Resource", href: "/resource", icon: "fas fa-tools" },
   ];
 

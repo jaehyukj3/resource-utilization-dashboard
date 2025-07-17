@@ -1,5 +1,6 @@
 // 예: app/dashboard/page.tsx (서버 컴포넌트)
 import { createClient } from "@/utils/supabase/server";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -9,7 +10,6 @@ export default async function DashboardPage() {
     .order("date_only", { ascending: false })
     .order("hour_of_day", { ascending: false })
     .limit(10);
-
 
   if (error) {
     console.error("Supabase fetch error:", error.message);
@@ -23,9 +23,11 @@ export default async function DashboardPage() {
       <p className="text-gray-700 text-lg mb-6">
         Tailwind + SCSS 템플릿이 성공적으로 적용됐습니다.
       </p>
-      <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded transition mb-8">
-        첫 컴포넌트 가기 →
-      </button>
+      <Link href="/dashboard">
+        <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded transition mb-8">
+          Dashboard 가기 →
+        </button>
+      </Link>
       <h2 className="text-2xl font-semibold mb-2">🔥 최근 리소스 스냅샷</h2>
       {Array.isArray(resources) && resources.length > 0 ? (
         <ul>
