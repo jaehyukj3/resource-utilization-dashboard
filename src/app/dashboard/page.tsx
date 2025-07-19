@@ -1,4 +1,4 @@
-import ChartSection from "@/app/components/Charts/AverageChartSection";
+import AverageChartSection from "@/app/components/Charts/AverageChartSection";
 import SummaryCardSection from "../components/Cards/SummaryCardSection";
 import { headers } from "next/headers";
 
@@ -21,7 +21,7 @@ export default async function DashboardPage() {
           <SummaryCardSection summary={summary} />
         </div>
         <div className="lg:w-1/2">
-          <ChartSection />
+          <AverageChartSection />
         </div>
       </div>
     </div>
