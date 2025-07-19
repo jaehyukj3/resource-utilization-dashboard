@@ -4,3 +4,7 @@
 
 @import "tailwindcss";
 @import "tailwindcss/preflight";
+
+@theme {
+  --breakpoint-compact: 460px;
+}
