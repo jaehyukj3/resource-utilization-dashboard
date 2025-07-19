@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`bg-blueGray-100 ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Sidebar />
-        <main className="min-h-screen relative md:ml-64 px-4 md:px-4 lg:px-6 md:py-6 py-8 mt-16 md:mt-0">
+        <main className="min-h-screen relative md:ml-64 px-4 md:px-4 lg:px-6 md:py-6 py-8 mt-16 md:mt-0 max-w-screen-2xl mx-auto">
           {children}
         </main>
       </body>
