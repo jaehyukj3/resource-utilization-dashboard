@@ -90,12 +90,12 @@ export default function AverageChartSection() {
   }
 
   return (
-    <section className="bg-white shadow rounded p-4 w-full max-w-screen-md mx-auto">
+    <section className="bg-white flex flex-col shadow rounded p-4 w-full h-[400px]">
       <h2 className="text-base md:text-lg font-semibold text-gray-800 mb-2 text-center">
         평균 리소스 사용률 분석 대시보드
       </h2>
 
-      <div className="flex flex-wrap gap-4  justify-between items-center mb-4">
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
         <div className="flex flex-wrap gap-2">
           {X_AXIS_OPTIONS.map((key) => (
             <button
@@ -133,10 +133,11 @@ export default function AverageChartSection() {
           ))}
         </div>
       </div>
-      <div className="h-[280px] sm:h-[300px]">
+      <div className="flex-1 min-h-0">
         <Line
           data={chartData}
           options={{
+            resizeDelay: 50,
             responsive: true,
             maintainAspectRatio: false,
             scales: {
