@@ -1,8 +1,7 @@
-// 예: app/dashboard/page.tsx (서버 컴포넌트)
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
-export default async function DashboardPage() {
+export default async function Page() {
   const supabase = await createClient();
   const { data: resources, error } = await supabase
     .from("resources")
