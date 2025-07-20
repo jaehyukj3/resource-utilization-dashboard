@@ -36,16 +36,25 @@ function getOrCreateTooltipEl(id: string) {
   if (!tooltipEl) {
     tooltipEl = document.createElement("div");
     tooltipEl.id = id;
+
+    // 🧤 여기부터 초기 스타일 지정
     tooltipEl.style.position = "absolute";
     tooltipEl.style.pointerEvents = "none";
     tooltipEl.style.zIndex = "50";
-    tooltipEl.style.background = "black";
-    tooltipEl.style.color = "white";
+    tooltipEl.style.background = "#111827";
+    tooltipEl.style.color = "#f9fafb";
     tooltipEl.style.padding = "4px 8px";
     tooltipEl.style.borderRadius = "4px";
     tooltipEl.style.fontSize = "12px";
     tooltipEl.style.whiteSpace = "nowrap";
     tooltipEl.style.transition = "all 0.1s ease";
+    tooltipEl.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+
+    tooltipEl.style.opacity = "0";
+    tooltipEl.style.left = "-9999px";
+    tooltipEl.style.top = "-9999px";
+    tooltipEl.style.transform = "translate(0, 0)";
+
     document.body.appendChild(tooltipEl);
   }
 
