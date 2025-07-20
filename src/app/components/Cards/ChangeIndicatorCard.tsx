@@ -6,7 +6,7 @@ type Props = {
 
 export function ChangeIndicatorCard({ indicators }: Props) {
   return (
-    <section className="bg-neutral-50 rounded-md shadow-sm h-full p-6 flex flex-col max-w-full">
+    <section className="bg-neutral-50 rounded-md shadow-sm h-full p-4 flex flex-col max-w-full">
       <h2 className="text-base md:text-lg text-center md:text-left font-bold text-indigo-600 mb-4">
         리소스 변화 추이
       </h2>
@@ -17,22 +17,22 @@ export function ChangeIndicatorCard({ indicators }: Props) {
             indicator.status === "up"
               ? "text-green-600"
               : indicator.status === "down"
-              ? "text-red-500"
-              : "text-gray-500";
+                ? "text-red-500"
+                : "text-gray-500";
 
           const iconClass =
             indicator.status === "up"
               ? "fas fa-arrow-up"
               : indicator.status === "down"
-              ? "fas fa-arrow-down"
-              : "fas fa-minus";
+                ? "fas fa-arrow-down"
+                : "fas fa-minus";
 
           const label =
             indicator.status === "up"
               ? "상승"
               : indicator.status === "down"
-              ? "하락"
-              : "유지";
+                ? "하락"
+                : "유지";
 
           return (
             <div
@@ -45,7 +45,9 @@ export function ChangeIndicatorCard({ indicators }: Props) {
             >
               <div className="text-sm text-gray-500">{indicator.metric}</div>
 
-              <div className={`flex items-center gap-1 font-bold whitespace-nowrap text-lg ${color}`}>
+              <div
+                className={`flex items-center gap-1 font-bold whitespace-nowrap text-lg ${color}`}
+              >
                 <i className={`${iconClass} text-base ${color}`}></i>
                 <span>{indicator.change_pct.toFixed(2)}%</span>
               </div>
