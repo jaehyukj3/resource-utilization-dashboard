@@ -53,7 +53,7 @@ export default function SummaryCardSection({ summary }: Props) {
             </div>
 
             {/* 수치 */}
-            <p className="text-3xl font-bold text-gray-800">
+            <p className="text-xl lg:text-3xl font-bold text-gray-800">
               {summary[key]?.toFixed(1) ?? "—"}%
             </p>
           </div>

@@ -127,7 +127,7 @@ export default function WorkloadAllocationScatterChart() {
           <option value="168h">7Days</option>
         </select>
       </div>
-      <div className="lg:h-[145px]">
+      <div className="h-[145px]">
         {loading ? (
           <div className="flex items-center justify-center h-full text-gray-500">
             데이터를 불러오는 중...
