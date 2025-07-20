@@ -4,6 +4,7 @@ import UsageChartSection from "../components/Charts/UsageChartSection";
 import { headers } from "next/headers";
 import { ChangeIndicatorCard } from "../components/Cards/ChangeIndicatorCard";
 import { ChangeIndicator } from "../types/dashboard";
+import WorkloadAllocationScatterChart from "../components/Charts/WorkloadAllocationChart";
 
 export default async function DashboardPage() {
   const headersList = await headers();
@@ -40,7 +41,9 @@ export default async function DashboardPage() {
           <div className="lg:w-1/2 lg:max-w-[calc(50%-12px)]">
             <ChangeIndicatorCard indicators={indicators} />
           </div>
-          <div className="lg:w-1/2 bg-white rounded-md shadow-sm p-4"></div>
+          <div className="lg:w-1/2 lg:max-w-[calc(50%-12px)]">
+            <WorkloadAllocationScatterChart />
+          </div>
         </div>
       </div>
     </div>
