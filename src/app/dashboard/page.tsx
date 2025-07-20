@@ -1,5 +1,6 @@
 import AverageChartSection from "@/app/components/Charts/AverageChartSection";
 import SummaryCardSection from "../components/Cards/SummaryCardSection";
+import UsageChartSection from "../components/Charts/UsageChartSection";
 import { headers } from "next/headers";
 
 export default async function DashboardPage() {
@@ -17,9 +18,11 @@ export default async function DashboardPage() {
         🚀 리소스 분석 대시보드
       </h1>
       <div className="flex flex-col lg:flex-row gap-6">
-        <div className="lg:w-1/2">
+        <div className="lg:w-1/2 flex flex-col gap-5">
           <SummaryCardSection summary={summary} />
+          <UsageChartSection />
         </div>
+
         <div className="lg:w-1/2">
           <AverageChartSection />
         </div>
