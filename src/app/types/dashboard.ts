@@ -1,3 +1,12 @@
+export type AverageChartData = {
+  hour_of_day?: number | string;
+  month_day?: string;
+  day_index?: number;
+  cpu_utilization?: number;
+  memory_usage?: number;
+  storage_usage?: number;
+};
+
 export type ChangeIndicator = {
   metric: "CPU" | "Memory" | "Storage";
   change_pct: number;

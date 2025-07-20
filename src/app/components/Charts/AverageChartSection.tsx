@@ -8,8 +8,10 @@ import {
   LinearScale,
   Legend,
   Tooltip,
+  ChartOptions,
 } from "chart.js";
 import { useState, useEffect } from "react";
+import { AverageChartData } from "@/app/types/dashboard";
 
 ChartJS.register(
   LineElement,
@@ -26,48 +28,46 @@ const LABEL_MAP: Record<string, string> = {
   month_day: "Date",
   day_index: "Day",
 };
+const COLOR_MAP: Record<string, string> = {
+  cpu_utilization: "#6366f1",
+  memory_usage: "#10b981",
+  storage_usage: "#f59e0b",
+};
 const DAY_ORDER = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const METRIC_KEYS = ["cpu_utilization", "memory_usage", "storage_usage"];
 
-type ChartDataItem = {
-  hour_of_day?: number | string;
-  month_day?: string;
-  day_index?: number;
-  cpu_utilization?: number;
-  memory_usage?: number;
-  storage_usage?: number;
-};
-
 export default function AverageChartSection() {
-  const [data, setData] = useState<ChartDataItem[]>([]);
+  const [data, setData] = useState<AverageChartData[]>([]);
   const [xKey, setXKey] = useState("hour_of_day");
+  const [loading, setLoading] = useState(true);
   const [selectedMetrics, setSelectedMetrics] = useState(METRIC_KEYS);
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/average-chart?group=" + xKey)
       .then((res) => res.json())
       .then((res) => {
         setData(res?.chart || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("데이터 fetch 실패:", err);
+        setData([]);
+        setLoading(false);
       });
   }, [xKey]);
 
   const labels =
     xKey === "day_index"
       ? DAY_ORDER
-      : data.map((item) => item[xKey as keyof ChartDataItem] as string);
-
-  const COLOR_MAP: Record<string, string> = {
-    cpu_utilization: "#6366f1",
-    memory_usage: "#10b981",
-    storage_usage: "#f59e0b",
-  };
+      : data.map((item) => item[xKey as keyof AverageChartData] as string);
 
   const chartData = {
     labels,
     datasets: METRIC_KEYS.filter((key) => selectedMetrics.includes(key)).map(
       (key) => ({
         label: extractMetricPrefix(key),
-        data: data.map((item) => item[key as keyof ChartDataItem] ?? 0),
+        data: data.map((item) => item[key as keyof AverageChartData] ?? 0),
         borderColor: COLOR_MAP[key],
         backgroundColor: COLOR_MAP[key],
         pointStyle: "circle",
@@ -76,6 +76,45 @@ export default function AverageChartSection() {
         tension: 0.3,
       })
     ),
+  };
+
+  const chartOptions: ChartOptions<"line"> = {
+    resizeDelay: 50,
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        grid: { display: false },
+      },
+      x: {
+        ticks: { maxRotation: 0, autoSkip: true, padding: 6 },
+        grid: { display: false },
+      },
+    },
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          usePointStyle: true,
+          pointStyle: "circle",
+          boxWidth: 8,
+          boxHeight: 8,
+          padding: 10,
+          color: "#333",
+        },
+      },
+      tooltip: {
+        usePointStyle: true,
+        callbacks: {
+          label: (ctx) => {
+            const value = parseFloat(ctx.formattedValue);
+            return `${ctx.dataset.label}: ${value.toFixed(2)}%`;
+          },
+        },
+      },
+    },
   };
 
   function extractMetricPrefix(str: string): string {
@@ -134,57 +173,17 @@ export default function AverageChartSection() {
         </div>
       </div>
       <div className="flex-1 min-h-0">
-        <Line
-          data={chartData}
-          options={{
-            resizeDelay: 50,
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true,
-                max: 100,
-                grid: {
-                  display: false,
-                },
-              },
-              x: {
-                ticks: {
-                  maxRotation: 0,
-                  autoSkip: true,
-                  padding: 6,
-                },
-                grid: {
-                  display: false,
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                position: "bottom",
-                labels: {
-                  usePointStyle: true,
-                  pointStyle: "circle",
-                  boxWidth: 8,
-                  boxHeight: 8,
-                  padding: 10,
-                  color: "#333",
-                },
-              },
-              tooltip: {
-                usePointStyle: true,
-
-                callbacks: {
-                  label: (ctx) => {
-                    const value = parseFloat(ctx.formattedValue);
-                    return `${ctx.dataset.label}: ${value.toFixed(2)}%`;
-                  },
-                },
-              },
-            },
-          }}
-          height={200}
-        />
+        {loading ? (
+          <div className="flex items-center justify-center h-full text-gray-500">
+            데이터를 불러오는 중...
+          </div>
+        ) : !loading && data.length === 0 ? (
+          <div className="flex items-center justify-center h-full text-gray-400">
+            해당 기간에 데이터가 없습니다.
+          </div>
+        ) : (
+          <Line data={chartData} options={chartOptions} height={200} />
+        )}
       </div>
     </section>
   );
