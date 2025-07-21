@@ -22,26 +22,26 @@ export default async function DashboardPage() {
   const indicators: ChangeIndicator[] = indicatorJson.data ?? [];
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col w-full h-full">
       <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-indigo-600 text-center mb-6">
         🚀 리소스 분석 대시보드
       </h1>
-      <div className="flex flex-col gap-6 lg:min-h-[621px]">
-        <div className="flex flex-col lg:flex-row gap-6">
-          <div className="lg:w-1/2 flex flex-col gap-5">
+      <div className="flex flex-1 flex-col gap-6 lg:min-h-[621px] lg:max-h-[calc(100%-36px)]">
+        <div className="flex flex-col lg:flex-row gap-6 lg:h-[calc(55%-12px)]">
+          <div className="lg:w-[calc(50%-12px)] lg:min-w-[calc(50%-12px)] flex flex-col gap-6">
             <SummaryCardSection summary={summary} />
             <UsageChartSection />
           </div>
 
-          <div className="lg:w-1/2">
+          <div className="lg:w-[calc(50%-12px)] lg:min-w-[calc(50%-12px)]">
             <AverageChartSection />
           </div>
         </div>
-        <div className="flex flex-grow flex-col lg:flex-row gap-6">
-          <div className="lg:w-1/2 lg:max-w-[calc(50%-12px)]">
+        <div className="flex flex-grow flex-col lg:flex-row gap-6 lg:h-[calc(45%-12px)]">
+          <div className="lg:w-[calc(30%-12px)] lg:min-w-[calc(30%-12px)] lg:max-w-[calc(30%-12px)] xl:min-w-[calc(25%-12px)] xl:max-w-[calc(25%-12px)]">
             <ChangeIndicatorCard indicators={indicators} />
           </div>
-          <div className="lg:w-1/2 lg:max-w-[calc(50%-12px)]">
+          <div className="lg:w-[calc(70%-12px)] lg:min-w-[calc(70%-12px)] lg:max-w-[calc(70%-12px)] xl:min-w-[calc(75%-12px)] xl:max-w-[calc(75%-12px)]">
             <WorkloadAllocationScatterChart />
           </div>
         </div>

@@ -129,7 +129,7 @@ export default function AverageChartSection() {
   }
 
   return (
-    <section className="bg-white flex flex-col shadow rounded p-4 w-full h-[400px]">
+    <section className="bg-white flex flex-col shadow rounded p-4 w-full h-full min-h-[400px]">
       <h2 className="text-base md:text-lg font-semibold text-gray-800 mb-2 text-center">
         평균 리소스 사용률
       </h2>

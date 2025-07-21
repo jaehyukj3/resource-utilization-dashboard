@@ -113,7 +113,7 @@ export default function WorkloadAllocationScatterChart() {
   };
 
   return (
-    <div className="w-full bg-white rounded-md p-4 shadow-sm lg:h-[197.6px] lg:max-h-full">
+    <div className="w-full bg-white rounded-md p-4 shadow-sm lg:h-[100%] lg:max-h-full">
       <div className=" flex justify-between items-center">
         <h2 className="text-base md:text-lg font-semibold text-gray-800">
           워크로드 / 할당
@@ -127,7 +127,7 @@ export default function WorkloadAllocationScatterChart() {
           <option value="168h">7Days</option>
         </select>
       </div>
-      <div className="h-[145px]">
+      <div className="h-[145px] lg:h-[calc(100%-34px)]">
         {loading ? (
           <div className="flex items-center justify-center h-full text-gray-500">
             데이터를 불러오는 중...

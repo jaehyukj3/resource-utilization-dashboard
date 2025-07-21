@@ -40,7 +40,7 @@ export default function SummaryCardSection({ summary }: Props) {
         return (
           <div
             key={key}
-            className={`${bgColor} rounded-xl shadow-sm hover:shadow-md transition-transform hover:scale-[1.02] p-5 flex flex-col justify-between h-full`}
+            className={`${bgColor} rounded-xl shadow-sm hover:shadow-md transition-transform hover:scale-[1.02] p-5 flex flex-col justify-between h-[110px]`}
           >
             {/* 아이콘 + 타이틀 */}
             <div
