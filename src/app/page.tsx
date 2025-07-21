@@ -1,6 +1,23 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
+export async function generateMetadata() {
+  return {
+    title: "🚀 대시보드 시작",
+    description:
+      "리소스 데이터를 시각화한 대시보드 프로젝트 시작 페이지입니다.",
+    openGraph: {
+      title: "🚀 대시보드 시작",
+      description:
+        "리소스 데이터를 시각화한 대시보드 프로젝트 시작 페이지입니다.",
+      url: "https://resource-utilization-dashboard.vercel.app",
+      siteName: "Resource Nextjs",
+      locale: "ko-KR",
+      type: "website",
+    },
+  };
+}
+
 export default async function Page() {
   const supabase = await createClient();
   const { data: resources, error } = await supabase
@@ -35,7 +52,9 @@ export default async function Page() {
         </Link>
       </div>
 
-      <h2 className="text-lg md:text-2xl font-semibold mb-2">🔥 최근 리소스 스냅샷</h2>
+      <h2 className="text-lg md:text-2xl font-semibold mb-2">
+        🔥 최근 리소스 스냅샷
+      </h2>
       {Array.isArray(resources) && resources.length > 0 ? (
         <ul>
           {resources.map((r) => (

@@ -6,6 +6,21 @@ import { ChangeIndicatorCard } from "../components/Cards/ChangeIndicatorCard";
 import { ChangeIndicator } from "../types/dashboard";
 import WorkloadAllocationScatterChart from "../components/Charts/WorkloadAllocationChart";
 
+export async function generateMetadata() {
+  return {
+    title: "🚀 리소스 분석 대시보드",
+    description: "리소스 데이터를 시각화하여 분석하는 대시보드 페이지입니다.",
+    openGraph: {
+      title: "🚀 리소스 분석 대시보드",
+      description: "리소스 데이터를 시각화하여 분석하는 대시보드 페이지입니다.",
+      url: "https://resource-utilization-dashboard.vercel.app/dashboard",
+      siteName: "Rsource Nextjs",
+      locale: "ko-KR",
+      type: "website",
+    },
+  };
+}
+
 export default async function DashboardPage() {
   const headersList = await headers();
   const host = headersList.get("host");
