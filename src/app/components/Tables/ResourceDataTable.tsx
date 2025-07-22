@@ -35,13 +35,13 @@ export default function ResourceDataTable() {
   return (
     <section className="flex flex-col min-h-[300px] h-full max-h-full ">
       <div className="h-full max-h-full overflow-hidden">
-        <div className="h-full max-h-full bg-white overflow-auto ">
+        <div className="h-full max-h-full bg-white overflow-auto">
           {isLoading ? (
-            <div className="flex items-center justify-center h-full text-gray-400 animate-pulse">
+            <div className="flex items-center justify-center min-h-[300px] h-full text-gray-400 animate-pulse">
               데이터 불러오는 중...
             </div>
           ) : currentData.length === 0 ? (
-            <div className="flex items-center justify-center h-full text-gray-400">
+            <div className="flex items-center justify-center min-h-[300px] h-full text-gray-400">
               해당 기간에 데이터가 없습니다.
             </div>
           ) : (
