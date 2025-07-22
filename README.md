@@ -125,11 +125,10 @@ https://www.kaggle.com/code/jaehyukj3/resource-utilization-data
 | date_only | 날짜만 추출 (YYYY-MM-DD) | 
 | hour_of_day | 시간대 추출 (0~23시) | 
 | day_of_week | 요일명 추출 (ex. Monday) | 
-| day_index | 요일 숫자 (0일) | 
+| day_index | 요일 숫자 (0~6) | 
 
 ### 6️⃣ 시간 정렬 및 인덱스 초기화
 - timestamp 기준 오름차순 정렬
-- .reset_index(drop=True)로 기존 인덱스 제거
 ### 7️⃣ ID 컬럼 생성
 - df.index 기반으로 id 컬럼 생성 후 맨 앞으로 이동
 ### 8️⃣ 전처리 결과 출력 및 저장
