@@ -21,16 +21,16 @@ Robots.txt: [robots.txt](https://resource-utilization-dashboard.vercel.app/robot
 
 - 최근 리소스 항목들을 시간 순으로 정리된 스냅샷 형태로 보여줍니다
 - 상단의 안내문과 버튼으로 하위 페이지로 진입 유도 (Dashboard / Resource)
-<img width="1913" height="921" alt="Image" src="https://github.com/user-attachments/assets/466d9b23-ee00-41d2-8b76-7ea1fa334fad" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/8b9ffb8d-3479-4519-9869-b21b25496440" />
+
 
 ### 📊 분석 대시보드 `/dashboard`
 리소스 지표를 카드 및 차트 형태로 시각적으로 분할하여 보여줍니다.
-<img width="1908" height="918" alt="Image" src="https://github.com/user-attachments/assets/b3086aa3-6071-491d-bb5c-04d009697c69" />
----
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/236fe28e-8090-4c94-8bff-7f27738415a6" />
 
 ### 📋 리소스 테이블 `/resource`
 최근 리소스 상태를 시계열 기준으로 정리한 테이블 형태로 확인할 수 있습니다.
-<img width="1912" height="920" alt="Image" src="https://github.com/user-attachments/assets/474359c2-1f77-41a6-8748-3559b8235655" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/3f933a90-ca06-4415-885c-6139b98677e5" />
 
 
 ## 🚀 실행 방법
