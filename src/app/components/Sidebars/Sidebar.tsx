@@ -1,17 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const Sidebar = () => {
   const [collapseShow, setCollapseShow] = useState("hidden");
   const pathname = usePathname();
+  const collapseRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
     { label: "Dashboard", href: "/dashboard", icon: "fas fa-tv" },
     { label: "Resource", href: "/resource", icon: "fas fa-tools" },
   ];
+
+  // 1. 페이지 이동 시 collapse 닫기
+  useEffect(() => {
+    setCollapseShow("hidden");
+  }, [pathname]);
+
+  // 2. collapse 밖 클릭 시 닫기
+  useEffect(() => {
+    if (collapseShow === "hidden") return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        collapseRef.current &&
+        !collapseRef.current.contains(event.target as Node)
+      ) {
+        setCollapseShow("hidden");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [collapseShow]);
 
   return (
     <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -37,6 +62,7 @@ const Sidebar = () => {
 
         {/* Collapse */}
         <div
+          ref={collapseRef}
           className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}`}
         >
           {/* Collapse header */}
