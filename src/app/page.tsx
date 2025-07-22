@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { headers } from "next/headers";
 import Link from "next/link";
 
 export async function generateMetadata() {
@@ -19,24 +19,20 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const supabase = await createClient();
-  const { data: resources, error } = await supabase
-    .from("resources")
-    .select("*")
-    .order("date_only", { ascending: false })
-    .order("hour_of_day", { ascending: false })
-    .limit(10);
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
 
-  if (error) {
-    console.error("Supabase fetch error:", error.message);
-  }
+  const res = await fetch(`${protocol}://${host}/api/resource-preview`);
+  const data = await res.json();
+  const resources = Array.isArray(data.resources) ? data.resources : [];
 
   return (
     <div className="mx-auto text-center max-w-3xl p-4">
       <h1 className="text-xl md:text-4xl font-bold text-indigo-600 mb-4">
         🚀 대시보드 시작
       </h1>
-      <p className="text-gray-700 text-base md:text-lg mb-6">
+      <p className="text-gray-700 text-base md:text-lg mb-6 break-keep">
         리소스 데이터를 시각화한 대시보드 프로젝트입니다.
       </p>
       <div className="flex justify-center items-center flex-col md:flex-row gap-4 mb-8">
