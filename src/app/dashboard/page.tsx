@@ -1,10 +1,10 @@
 import AverageChartSection from "@/app/components/Charts/AverageChartSection";
 import SummaryCardSection from "../components/Cards/SummaryCardSection";
 import UsageChartSection from "../components/Charts/UsageChartSection";
+import WorkloadAllocationScatterChart from "../components/Charts/WorkloadAllocationChart";
 import { headers } from "next/headers";
 import { ChangeIndicatorCard } from "../components/Cards/ChangeIndicatorCard";
 import { ChangeIndicator } from "../types/dashboard";
-import WorkloadAllocationScatterChart from "../components/Charts/WorkloadAllocationChart";
 
 export async function generateMetadata() {
   return {
