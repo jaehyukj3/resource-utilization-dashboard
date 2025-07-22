@@ -33,9 +33,9 @@ export default function ResourceDataTable() {
   );
 
   return (
-    <section className="flex flex-col min-h-[300px] h-full max-h-full ">
-      <div className="h-full max-h-full overflow-hidden">
-        <div className="h-full max-h-full bg-white overflow-auto">
+    <section className="flex flex-col w-full h-[calc(100vh-116px)] px-4 py-6">
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full max-h-full bg-white overflow-auto rounded shadow">
           {isLoading ? (
             <div className="flex items-center justify-center min-h-[300px] h-full text-gray-400 animate-pulse">
               데이터 불러오는 중...
