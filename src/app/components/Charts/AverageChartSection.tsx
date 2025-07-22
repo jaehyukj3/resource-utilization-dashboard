@@ -172,7 +172,7 @@ export default function AverageChartSection() {
           ))}
         </div>
       </div>
-      <div className="flex-1 min-h-0">
+      <div className="flex items-center justify-center flex-1 min-h-0">
         {loading ? (
           <div className="flex items-center justify-center h-full text-gray-500">
             데이터를 불러오는 중...
