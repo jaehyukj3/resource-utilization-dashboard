@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { format, parseISO } from "date-fns";
 import { ResourceData } from "@/app/types/resource";
 
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 50;
 
 export default function ResourceDataTable() {
   const [data, setData] = useState<ResourceData[]>([]);
@@ -33,9 +33,9 @@ export default function ResourceDataTable() {
   );
 
   return (
-    <section className="flex flex-col flex-1 h-full max-h-full md:max-h-full">
-      <div className="h-full max-h-full md:max-h-[calc(100%-54px)] overflow-hidden">
-        <div className="h-full max-h-full  bg-white overflow-auto ">
+    <section className="flex flex-col min-h-[300px] h-full max-h-full ">
+      <div className="h-full max-h-full overflow-hidden">
+        <div className="h-full max-h-full bg-white overflow-auto ">
           {isLoading ? (
             <div className="flex items-center justify-center h-full text-gray-400 animate-pulse">
               데이터 불러오는 중...
@@ -45,7 +45,7 @@ export default function ResourceDataTable() {
               해당 기간에 데이터가 없습니다.
             </div>
           ) : (
-            <table className="min-w-full  table-fixed text-sm bg-white">
+            <table className="min-w-full table-fixed text-sm bg-white">
               <thead className="sticky top-[-1px] z-10 bg-slate-50 text-gray-600 text-left shadow-sm">
                 <tr>
                   <th className="px-2 py-2 w-40">Timestamp</th>
