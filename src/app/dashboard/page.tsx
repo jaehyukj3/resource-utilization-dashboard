@@ -2,9 +2,8 @@ import AverageChartSection from "@/app/components/Charts/AverageChartSection";
 import SummaryCardSection from "../components/Cards/SummaryCardSection";
 import UsageChartSection from "../components/Charts/UsageChartSection";
 import WorkloadAllocationScatterChart from "../components/Charts/WorkloadAllocationChart";
-import { headers } from "next/headers";
 import { ChangeIndicatorCard } from "../components/Cards/ChangeIndicatorCard";
-import { ChangeIndicator } from "../types/dashboard";
+import { getSummary, getIndicators } from "../lib/dashboard-data";
 
 export async function generateMetadata() {
   return {
@@ -22,20 +21,10 @@ export async function generateMetadata() {
 }
 
 export default async function DashboardPage() {
-  const headersList = await headers();
-  const host = headersList.get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const summary = await getSummary();
+  const indicators = await getIndicators();
 
-  const res = await fetch(`${protocol}://${host}/api/summary-card`);
-  const data = await res.json();
-  const summary = Array.isArray(data.summary) ? data.summary[0] : {};
-
-  const indicatorRes = await fetch(
-    `${protocol}://${host}/api/change-Indicator`
-  );
-  const indicatorJson = await indicatorRes.json();
-  const indicators: ChangeIndicator[] = indicatorJson.data ?? [];
-
+  console.log("Summary Data:", summary);
   return (
     <div className="flex flex-col w-full h-full wide:max-h-(900px) wide:min-h-(900px)">
       <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-indigo-600 text-center mb-6">

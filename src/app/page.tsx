@@ -1,5 +1,6 @@
-import { headers } from "next/headers";
 import Link from "next/link";
+import { getResourcePreview } from "./lib/resource-preview";
+import { ResourcePreview } from "./types/resource-preview";
 
 export async function generateMetadata() {
   return {
@@ -19,13 +20,7 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const headersList = await headers();
-  const host = headersList.get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-
-  const res = await fetch(`${protocol}://${host}/api/resource-preview`);
-  const data = await res.json();
-  const resources = Array.isArray(data.resources) ? data.resources : [];
+  const resources: ResourcePreview[] = await getResourcePreview();
 
   return (
     <div className="mx-auto text-center max-w-3xl p-4">

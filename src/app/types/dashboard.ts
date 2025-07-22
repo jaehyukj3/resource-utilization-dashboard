@@ -19,3 +19,11 @@ export type ResourceAllocationStat = {
   resource_allocation: number;
   workload: number;
 };
+
+export type Summary = {
+  avg_cpu_utilization: number;
+  avg_memory_usage: number;
+  avg_storage_usage: number;
+  avg_workload: number;
+  [key: string]: number | undefined;
+};

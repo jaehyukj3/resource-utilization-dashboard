@@ -1,7 +1,7 @@
+import type { ResourcePreview } from "@/app/types/resource-preview";
 import { createClient } from "@/utils/supabase/server";
-import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function getResourcePreview(): Promise<ResourcePreview[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("resources")
@@ -12,11 +12,8 @@ export async function GET() {
 
   if (error) {
     console.error("Supabase preview fetch error:", error.message);
-    return NextResponse.json(
-      { error: "Failed to fetch preview data" },
-      { status: 500 }
-    );
+    return [];
   }
 
-  return NextResponse.json({ resources: data });
+  return data ?? [];
 }

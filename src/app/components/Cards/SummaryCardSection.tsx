@@ -1,5 +1,6 @@
 // SummaryCardSection.tsx
 import styles from "@/app/styles/components/cards/SummaryCardSection.module.scss";
+import { Summary } from "@/app/types/dashboard";
 
 const cardInfo = [
   {
@@ -29,36 +30,35 @@ const cardInfo = [
 ];
 
 type Props = {
-  summary: Record<string, number>;
+  summary: Summary[];
 };
 
 export default function SummaryCardSection({ summary }: Props) {
   return (
     <section className="grid grid-cols-1 compact:grid-cols-2 gap-5">
-      {cardInfo.map(({ label, key, iconClass, color }) => {
-        const [bgColor, textColor] = color.split(" ");
-        return (
-          <div
-            key={key}
-            className={`${bgColor} rounded-xl shadow-sm hover:shadow-md transition-transform hover:scale-[1.02] p-5 flex flex-col justify-between h-[110px]`}
-          >
-            {/* 아이콘 + 타이틀 */}
+      {summary.map((item, idx) =>
+        cardInfo.map(({ label, key, iconClass, color }) => {
+          const [bgColor, textColor] = color.split(" ");
+          return (
             <div
-              className={`flex items-center gap-2 text-sm ${textColor} mb-2`}
+              key={key + idx}
+              className={`${bgColor} rounded-xl shadow-sm hover:shadow-md transition-transform hover:scale-[1.02] p-5 flex flex-col justify-between h-[110px]`}
             >
-              <i
-                className={`${iconClass} text-base sm:text-lg ${styles.summaryCardSectionIcon}`}
-              />
-              <span className="font-medium">{label}</span>
+              <div
+                className={`flex items-center gap-2 text-sm ${textColor} mb-2`}
+              >
+                <i
+                  className={`${iconClass} text-base sm:text-lg ${styles.summaryCardSectionIcon}`}
+                />
+                <span className="font-medium">{label}</span>
+              </div>
+              <p className="text-xl lg:text-3xl font-bold text-gray-800">
+                {item[key]?.toFixed(1) ?? "—"}%
+              </p>
             </div>
-
-            {/* 수치 */}
-            <p className="text-xl lg:text-3xl font-bold text-gray-800">
-              {summary[key]?.toFixed(1) ?? "—"}%
-            </p>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </section>
   );
 }
