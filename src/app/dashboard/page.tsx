@@ -24,9 +24,8 @@ export default async function DashboardPage() {
   const summary = await getSummary();
   const indicators = await getIndicators();
 
-  console.log("Summary Data:", summary);
   return (
-    <div className="flex flex-col w-full h-full wide:max-h-(900px) wide:min-h-(900px)">
+    <div className="flex flex-col w-full h-[calc(100vh-48px)] wide:max-h-(900px) wide:min-h-(900px)">
       <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-indigo-600 text-center mb-6">
         🚀 리소스 분석 대시보드
       </h1>

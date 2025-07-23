@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`bg-blueGray-100 ${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
       >
         <Sidebar />
-        <main className="wide:h-[min(900px, 100vh)] wide:max-h-[min(900px, 100vh)] relative md:ml-64 px-4 md:px-4 lg:px-6 md:py-6 py-8 mt-12 md:mt-0 max-w-[1440px] mx-auto">
+        <main className="wide:h-[min(920px, 100vh)] wide:max-h-[min(920px, 100vh)] relative md:ml-64 px-4 md:px-4 lg:px-6 md:py-6 py-8 mt-12 md:mt-0 max-w-[1640px] mx-auto">
           {children}
         </main>
       </body>

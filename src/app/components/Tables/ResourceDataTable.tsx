@@ -33,7 +33,7 @@ export default function ResourceDataTable() {
   );
 
   return (
-    <section className="flex flex-col w-full h-[calc(100vh-116px)] px-4 py-6">
+    <section className="flex flex-col w-full h-[calc(100vh-108px)] px-4">
       <div className="flex-1 overflow-hidden">
         <div className="h-full max-h-full bg-white overflow-auto rounded shadow">
           {isLoading ? (
