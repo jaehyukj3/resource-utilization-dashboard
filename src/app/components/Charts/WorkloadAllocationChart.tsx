@@ -3,6 +3,7 @@
 import {
   Chart as ChartJS,
   PointElement,
+  LineElement,
   Tooltip,
   Legend,
   LinearScale,
@@ -14,7 +15,14 @@ import { Scatter } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import { ResourceAllocationStat } from "@/app/types/dashboard";
 
-ChartJS.register(PointElement, Tooltip, Legend, LinearScale, Title);
+ChartJS.register(
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+  LinearScale,
+  Title
+);
 
 export default function WorkloadAllocationScatterChart() {
   const [stats, setStats] = useState<ResourceAllocationStat[]>([]);
