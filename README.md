@@ -7,10 +7,6 @@ Next.js 기반 리소스 시각화 대시보드 프로젝트입니다.
 링크
 배포 URL: https://resource-utilization-dashboard.vercel.app
 
-Sitemap: [sitemap.xml](https://resource-utilization-dashboard.vercel.app/sitemap.xml)
-
-Robots.txt: [robots.txt](https://resource-utilization-dashboard.vercel.app/robots.txt)
-
 ---
 
 ## 🧭 페이지 구성
