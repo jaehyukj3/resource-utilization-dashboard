@@ -8,24 +8,46 @@ on:
 jobs:
   keep-alive:
     runs-on: ubuntu-latest
-    steps:
-      - name: Install Supabase SDK
-        run: npm install @supabase/supabase-js
 
-      - name: Ping Supabase with lightweight query
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Supabase SDK
+        run: npm install @supabase/supabase-js --force
+
+      - name: Ping Supabase with visible query
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE }}
         run: |
           node -e "
-            const { createClient } = require('@supabase/supabase-js');
-            const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
-            supabase
-              .from('resources')
-              .select('id')
-              .limit(1)
-              .then(({ error, data }) => {
-                if (error) throw error;
-                console.log('Supabase keep-alive ping 성공:', data.length ? 'OK' : 'No rows');
-              });
+          (async () => {
+            try {
+              const { createClient } = require('@supabase/supabase-js');
+              const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+
+              const { data, count, error } = await supabase
+                .from('resources')
+                .select('id', { count: 'exact' })
+                .order('date_only', { ascending: false })
+                .order('hour_of_day', { ascending: false })
+                .limit(10);
+
+
+              if (error) throw error;
+
+              console.log('Supabase keep-alive ping 성공 ✅');
+              console.log('Returned rows:', data.length);
+              console.log('Row count:', count);
+            } catch (err) {
+              console.error('❌ Supabase ping 실패:', err.message);
+              process.exit(1);
+            }
+          })();
           "
