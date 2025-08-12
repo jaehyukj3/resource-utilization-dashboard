@@ -21,10 +21,10 @@ jobs:
       - name: Install Supabase SDK
         run: npm install @supabase/supabase-js --force
 
-      - name: Ping Supabase with visible query
+      - name: Call Supabase RPC function
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           node -e "
           (async () => {
@@ -32,21 +32,14 @@ jobs:
               const { createClient } = require('@supabase/supabase-js');
               const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-              const { data, count, error } = await supabase
-                .from('resources')
-                .select('id', { count: 'exact' })
-                .order('date_only', { ascending: false })
-                .order('hour_of_day', { ascending: false })
-                .limit(10);
-
+              const { data, error } = await supabase.rpc('get_workload_allocation_ranges');
 
               if (error) throw error;
 
-              console.log('Supabase keep-alive ping 성공 ✅');
-              console.log('Returned rows:', data.length);
-              console.log('Row count:', count);
+              console.log('✅ RPC 호출 성공: get_workload_allocation_ranges');
+              console.log('반환된 행 수:', data.length);
             } catch (err) {
-              console.error('❌ Supabase ping 실패:', err.message);
+              console.error('❌ RPC 호출 실패:', err.message);
               process.exit(1);
             }
           })();
